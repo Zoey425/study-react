@@ -1,0 +1,17 @@
+.game {
+    justify-content: center;
+    text-align: center;
+}
+
+.gameBoxWrap {
+    display: flex;
+    justify-content: center;
+}
+.gameBox {
+    border: 2px solid #666;
+    width: 600px;
+    text-align: center;
+}
+.item-img {
+    width: 400px;
+}
