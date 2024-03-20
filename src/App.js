@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 import Box from './component/Box.js';
+import rockImg from './img/rock.png';
+import paperImg from './img/paper.png';
+import scissorsImg from './img/scissors.png';
+
 /*
     유저스토리
     1. 유저는 박스 두개를 볼 수 있다.
@@ -21,29 +25,40 @@ import Box from './component/Box.js';
 const choice = {
     rock: {
         name: 'ROCK',
-        img: 'https://st.depositphotos.com/69369668/59991/i/450/depositphotos_599918908-stock-photo-digital-illustration-cartoon-rock.jpg',
+        img: rockImg,
     },
     scissors: {
         name: 'SCISSORS',
-        img: 'https://img.freepik.com/premium-vector/scissor-isolated-on-white-background-vector-illustration_454461-5617.jpg',
+        img: paperImg,
     },
     paper: {
         name: 'PAPER',
-        img: 'https://media.geeksforgeeks.org/wp-content/uploads/20210705223645/paper.jpeg',
+        img: scissorsImg,
     },
 };
 function App() {
     const [userSelect, setUserSelect] = useState(null);
     const [computerSelect, setComputerSelect] = useState(null);
+    const [gameResult, setaGameResult] = useState('Ready');
 
     const play = userChoice => {
         setUserSelect(choice[userChoice]);
         let computerChoice = getRandomItem();
         setComputerSelect(computerChoice);
+        setaGameResult(judgement(choice[userChoice], computerChoice));
+    };
+
+    const judgement = (user, computer) => {
+        //console.log('user', computer.name, 'computer', user.name);
+        if (user.name === computer.name) {
+            return 'TIE';
+        } else if (user.name === 'ROCK') return computer.name === 'SCISSORS' ? 'WIN' : 'LOSE';
+        else if (user.name === 'SCISSORS') return computer.name === 'PAPER' ? 'WIN' : 'LOSE';
+        else if (user.name === 'PAPER') return computer.name === 'ROCK' ? 'WIN' : 'LOSE';
     };
 
     const getRandomItem = () => {
-        let itemArray = Object.keys(choice); // 객체에 키 값만 뽑아서 Array로 만들어줌
+        let itemArray = Object.keys(choice); // choice 객체에 키 값만 뽑아서 Array로 만들어줌, Array로 만들어주면 index번호가 생김!
         console.log(itemArray);
         let randomItem = parseInt(Math.random() * itemArray.length);
         console.log(randomItem);
@@ -61,16 +76,22 @@ function App() {
                     <br />
                     컴퓨터와 가위바위보 게임을 해보세요!
                 </p>
+                <div className="gameBtn">
+                    <button>
+                        <img src={scissorsImg} alt="" onClick={() => play('scissors')} />
+                    </button>
+                    <button>
+                        <img src={rockImg} alt="" onClick={() => play('rock')} />
+                    </button>
+                    <button>
+                        <img src={paperImg} alt="" onClick={() => play('paper')} />
+                    </button>
+                </div>
             </header>
             <main>
-                <div className="gameBtn">
-                    <button onClick={() => play('scissors')}>가위</button>
-                    <button onClick={() => play('rock')}>바위</button>
-                    <button onClick={() => play('paper')}>보</button>
-                </div>
                 <div className="gameBoxWrap">
-                    <Box name="YOU" item={userSelect} />
-                    <Box name="COMPUTER" item={computerSelect} />
+                    <Box name="YOU" item={userSelect} result={gameResult} />
+                    <Box name="COMPUTER" item={computerSelect} result={gameResult} />
                 </div>
             </main>
         </div>
