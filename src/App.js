@@ -29,11 +29,11 @@ const choice = {
     },
     scissors: {
         name: 'SCISSORS',
-        img: paperImg,
+        img: scissorsImg,
     },
     paper: {
         name: 'PAPER',
-        img: scissorsImg,
+        img: paperImg,
     },
 };
 function App() {
