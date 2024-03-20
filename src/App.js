@@ -29,14 +29,27 @@ const choice = {
     },
     paper: {
         name: 'PAPER',
-        img: 'https://www.pngitem.com/pimgs/m/176-1767466_high-five-high-five-illustration-png-transparent-png.png',
+        img: 'https://media.geeksforgeeks.org/wp-content/uploads/20210705223645/paper.jpeg',
     },
 };
 function App() {
     const [userSelect, setUserSelect] = useState(null);
+    const [computerSelect, setComputerSelect] = useState(null);
 
     const play = userChoice => {
         setUserSelect(choice[userChoice]);
+        let computerChoice = getRandomItem();
+        setComputerSelect(computerChoice);
+    };
+
+    const getRandomItem = () => {
+        let itemArray = Object.keys(choice); // 객체에 키 값만 뽑아서 Array로 만들어줌
+        console.log(itemArray);
+        let randomItem = parseInt(Math.random() * itemArray.length);
+        console.log(randomItem);
+        let final = itemArray[randomItem];
+        // console.log('final', final);
+        return choice[final];
     };
 
     return (
@@ -57,7 +70,7 @@ function App() {
                 </div>
                 <div className="gameBoxWrap">
                     <Box name="YOU" item={userSelect} />
-                    {/* <Box name="COMPUTER" /> */}
+                    <Box name="COMPUTER" item={computerSelect} />
                 </div>
             </main>
         </div>
