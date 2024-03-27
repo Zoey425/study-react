@@ -10,3 +10,4 @@
     6. 박스 테두리가 결과에 따라 색이 변한다. 지면 빨강, 이기면 녹색, 비기면 검정
 
 [조이의 노션블로그 가위바위보 게임](https://mulberry-sunspot-56d.notion.site/128dcd60e4ea43fc8bf2a94429432712?pvs=4)
+[가위바위보게임](https://stalwart-mochi-f77409.netlify.app/)
